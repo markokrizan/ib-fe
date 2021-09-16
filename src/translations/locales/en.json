@@ -46,7 +46,8 @@
       "login_title": "Login"
     },
     "input_label": {
-      "email": "Email Adress",
+      "username": "Username",
+      "email": "Email Address",
       "password": "Password"
     },
     "button": {

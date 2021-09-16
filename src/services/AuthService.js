@@ -5,11 +5,11 @@ import { HTTP_METHODS, HTTP_STATUS_CODES } from 'consts';
 import { getItem, setItem, removeItem } from 'utils/localStorage';
 
 const ROUTES = {
-  LOGIN: '/auth/login',
-  ME: '/auth/me',
+  LOGIN: '/auth/signin',
+  ME: '/users/me',
   LOGOUT: '/auth/logout',
   FORGOT_PASSWORD: '/user/forgot-password',
-  REGISTER: '/auth/register',
+  REGISTER: '/auth/signup',
   RESET_PASSWORD: '/user/reset-password',
   SOCIAL: (provider) => `/auth/social/${provider}`,
   TOKEN_REFRESH: '/auth/refresh',

@@ -22,10 +22,10 @@ import {
   SOCIAL_AUTH_ERROR,
 } from './actionTypes';
 
-export function login(email, password, setErrors) {
+export function login(username, password, setErrors) {
   return {
     type: LOGIN_REQUEST,
-    email,
+    username,
     password,
     meta: {
       setErrors,

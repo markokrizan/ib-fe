@@ -6,8 +6,8 @@ import { loginSchema } from './validations';
 
 export default function LoginForm({ onSubmit, isPending }) {
   const handleOnSubmit = (values) => {
-    const { email, password } = values;
-    onSubmit(email, password);
+    const { username, password } = values;
+    onSubmit(username, password);
   };
 
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ export default function LoginForm({ onSubmit, isPending }) {
   return (
     <Formik
       initialValues={{
-        email: '',
+        username: '',
         password: '',
       }}
       validationSchema={loginSchema}
@@ -23,9 +23,11 @@ export default function LoginForm({ onSubmit, isPending }) {
     >
       <Form>
         <div>
-          <label htmlFor="email">{t('login_page.input_label.email')}</label>
-          <Field type="email" name="email" required autoFocus />
-          <ErrorMessage name="email">
+          <label htmlFor="username">
+            {t('login_page.input_label.username')}
+          </label>
+          <Field type="text" name="username" required autoFocus />
+          <ErrorMessage name="username">
             {(msg) =>
               t(msg, {
                 label: t('login_page.input_label.email'),

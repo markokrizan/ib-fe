@@ -34,10 +34,10 @@ import { HTTP_STATUS_CODES } from 'consts';
 
 const getRouterLocationSearch = (state) => state.router.location.search;
 
-export function* authorize({ type, email, password }) {
+export function* authorize({ type, username, password }) {
   try {
     yield put(startAction(type));
-    const token = yield call(authService.login, { email, password });
+    const token = yield call(authService.login, { username, password });
     yield put(loginSuccess());
     yield put(setToken(token));
     yield put(push(DASHBOARD));
