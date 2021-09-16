@@ -7,7 +7,6 @@ import { getItem, setItem, removeItem } from 'utils/localStorage';
 const ROUTES = {
   LOGIN: '/auth/signin',
   ME: '/users/me',
-  LOGOUT: '/auth/logout',
   FORGOT_PASSWORD: '/user/forgot-password',
   REGISTER: '/auth/signup',
   RESET_PASSWORD: '/user/reset-password',
@@ -71,11 +70,6 @@ class AuthService {
   };
 
   logout = async () => {
-    await this.httpService.request({
-      url: ROUTES.LOGOUT,
-      method: HTTP_METHODS.POST,
-    });
-
     this.destroySession();
   };
 
