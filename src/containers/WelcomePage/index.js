@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Button, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { LOGIN, REGISTER } from 'routes';
 

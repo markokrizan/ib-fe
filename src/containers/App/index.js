@@ -7,6 +7,7 @@ import Routes from './Routes';
 import { fetchAuthenticatedUser, logout } from 'store/auth/actions';
 import { makeSelectToken, makeSelectUser } from 'store/auth/selectors';
 import AppBar from 'components/AppBar';
+import MainLayout from 'components/MainLayout';
 
 function App() {
   const dispatch = useDispatch();
@@ -32,10 +33,10 @@ function App() {
         {token && !user ? (
           renderLoadingIndicator
         ) : (
-          <>
+          <MainLayout>
             {user && <AppBar onLogout={handleLogout} />}
             <Routes />
-          </>
+          </MainLayout>
         )}
         <Notifier />
       </SnackbarProvider>

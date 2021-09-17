@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import { loginSchema } from './validations';
+import { Button } from 'react-bootstrap';
+import Input from 'components/Input';
 
 export default function LoginForm({ onSubmit, isPending }) {
   const handleOnSubmit = (values) => {
@@ -21,36 +23,22 @@ export default function LoginForm({ onSubmit, isPending }) {
       validationSchema={loginSchema}
       onSubmit={handleOnSubmit}
     >
-      <Form>
-        <div>
-          <label htmlFor="username">
-            {t('login_page.input_label.username')}
-          </label>
-          <Field type="text" name="username" required autoFocus />
-          <ErrorMessage name="username">
-            {(msg) =>
-              t(msg, {
-                label: t('login_page.input_label.email'),
-              })
-            }
-          </ErrorMessage>
-        </div>
-        <div>
-          <label htmlFor="password">
-            {t('login_page.input_label.password')}
-          </label>
-          <Field type="password" name="password" required />
-          <ErrorMessage name="password">
-            {(msg) =>
-              t(msg, {
-                label: t('login_page.input_label.password'),
-              })
-            }
-          </ErrorMessage>
-        </div>
-        <button disabled={isPending} type="submit">
+      <Form className="d-flex flex-column w-25">
+        <Input
+          type="text"
+          name="username"
+          label="Username"
+          placeholder="Username"
+        />
+        <Input
+          type="password"
+          name="password"
+          label="Password"
+          placeholder="Password"
+        />
+        <Button disabled={isPending} type="submit">
           {t('login_page.button.login')}
-        </button>
+        </Button>
       </Form>
     </Formik>
   );

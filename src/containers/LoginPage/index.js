@@ -8,7 +8,6 @@ import {
   makeSelectIsSocialAuthPending,
 } from 'store/auth/selectors';
 import { login } from 'store/auth/actions';
-import SocialAuth from 'containers/SocialAuth';
 import LoginForm from './LoginForm';
 import { REGISTER, FORGOT_PASSWORD } from 'routes';
 
@@ -25,17 +24,13 @@ function LoginPage() {
   const renderPendingIndicator = <div>Please wait...</div>;
 
   return (
-    <main>
+    <main className="h-100">
       <Helmet>
         <title>Login - React Boilerplate</title>
       </Helmet>
       <h1>{t('login_page.text.login_title')}</h1>
       {!isSocialAuthPending ? (
         <>
-          <SocialAuth
-            facebookButtonText={t('login_page.button.facebook')}
-            googleButtonText={t('login_page.button.google')}
-          />
           <LoginForm onSubmit={submitLoginForm} isPending={isLoginPending} />
           <Link to={FORGOT_PASSWORD}>
             {t('login_page.link.forgot_password')}
