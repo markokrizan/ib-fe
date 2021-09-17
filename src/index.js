@@ -10,6 +10,8 @@ import ErrorBoundry from 'containers/ErrorBoundary';
 import configureStore from 'store';
 import * as serviceWorker from 'serviceWorker';
 import './translations';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/index.scss';
 
 const initialState = {};
 const store = configureStore(initialState, history);

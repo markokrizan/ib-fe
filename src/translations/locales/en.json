@@ -122,12 +122,11 @@
     }
   },
   "welcome_page": {
-    "heading": "Vivify Ideas React Boilerplate",
-    "subheading": "We are Vivify Ideas, a web development company and home of extraordinary developers.",
+    "heading": "Clinic App",
+    "subheading": "Marko Krizan - SF-10-2015",
     "link": {
       "login": "Login",
       "register": "Register"
-    },
-    "built_with_love": "Built with love by the {{ team }} team."
+    }
   }
 }
