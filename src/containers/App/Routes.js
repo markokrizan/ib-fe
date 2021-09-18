@@ -17,14 +17,14 @@ import {
   REGISTER,
   FORGOT_PASSWORD,
   RESET_PASSWORD,
-  USER_PROFILE
+  USER_PROFILE,
 } from 'routes';
 
 export default function Routes() {
   return (
     <Switch>
       <PublicRoute exact path={WELCOME} component={WelcomePage} />
-      <PrivateRoute exact path={DASHBOARD} component={Dashboard} />
+      <PrivateRoute path={DASHBOARD} component={Dashboard} />
       <PrivateRoute exact path={USER_PROFILE} component={UserProfilePage} />
       <PublicRoute exact path={LOGIN} component={LoginPage} />
       <PublicRoute exact path={REGISTER} component={RegisterPage} />

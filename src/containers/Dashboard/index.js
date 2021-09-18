@@ -1,16 +1,21 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useTranslation } from 'react-i18next';
+import { Switch, useRouteMatch, Route, Redirect } from 'react-router';
+import Doctors from 'containers/Doctors';
 
 function Dashboard() {
-  const { t } = useTranslation();
+  let { path } = useRouteMatch();
 
   return (
     <main>
       <Helmet>
-        <title>Dashboard - React Boilerplate</title>
+        <title>Dashboard</title>
       </Helmet>
-      <h1>{t('dashboard.header')}</h1>
+
+      <Switch>
+        <Redirect exact from={path} to={`${path}/doctors`} />
+        <Route exact path={`${path}/doctors`} component={Doctors} />
+      </Switch>
     </main>
   );
 }
