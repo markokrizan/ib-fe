@@ -33,10 +33,12 @@ function App() {
         {token && !user ? (
           renderLoadingIndicator
         ) : (
-          <MainLayout>
-            {user && <AppBar onLogout={handleLogout} />}
-            <Routes />
-          </MainLayout>
+          <>
+            {user && <AppBar onLogout={handleLogout} user={user} />}
+            <MainLayout>
+              <Routes />
+            </MainLayout>
+          </>
         )}
         <Notifier />
       </SnackbarProvider>

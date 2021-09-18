@@ -1,14 +1,16 @@
 {
   "app_bar": {
     "link": {
+      "appName": "Clinic app",
       "logout": "Logout",
       "notifications": "Notifications",
-      "profile": "Profile"
+      "profile": "Profile",
+      "signedIn": "Signed in as:"
     }
   },
   "dashboard": {
     "header": "Starten Sie Ihr nächstes React-Projekt in Sekunden",
-    "select_language": "Sprache auswählen"
+    "select_language": "Sprache auswählen:"
   },
   "error_page": {
     "header": "This is embarrassing 🤦‍",

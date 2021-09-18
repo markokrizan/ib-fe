@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 import {
   makeSelectIsLoginPending,
   makeSelectIsSocialAuthPending,
@@ -28,16 +29,18 @@ function LoginPage() {
       <Helmet>
         <title>Login - React Boilerplate</title>
       </Helmet>
-      <h1>{t('login_page.text.login_title')}</h1>
       {!isSocialAuthPending ? (
-        <>
+        <Container className="d-flex flex-column align-items-center">
+          <h1>{t('login_page.text.login_title')}</h1>
           <LoginForm onSubmit={submitLoginForm} isPending={isLoginPending} />
-          <Link to={FORGOT_PASSWORD}>
-            {t('login_page.link.forgot_password')}
-          </Link>
-          <br />
-          <Link to={REGISTER}>{t('login_page.link.register')}</Link>
-        </>
+          <div className="mt-3">
+            <Link to={FORGOT_PASSWORD}>
+              {t('login_page.link.forgot_password')}
+            </Link>
+            <br />
+            <Link to={REGISTER}>{t('login_page.link.register')}</Link>
+          </div>
+        </Container>
       ) : (
         renderPendingIndicator
       )}
