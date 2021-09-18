@@ -6,6 +6,7 @@ import loadingReducer from './loading/reducer';
 import notifierReducer from './notifier/reducer';
 import authReducer from './auth/reducer';
 import profileReducer from './profile/reducer';
+import doctorReducer from './doctor/reducer';
 
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ export default function createReducer(injectedReducers = {}) {
     notifier: notifierReducer,
     auth: authReducer,
     profile: profileReducer,
+    doctor: doctorReducer,
     ...injectedReducers,
   });
 

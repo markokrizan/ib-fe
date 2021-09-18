@@ -130,5 +130,9 @@
       "register": "Register"
     },
     "built_with_love": "Built with love by the {{ team }} team."
+  },
+  "doctors_page": {
+    "contact_information": "Contact information:",
+    "details": "Details"
   }
 }

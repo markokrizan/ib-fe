@@ -130,5 +130,9 @@
       "login": "Login",
       "register": "Register"
     }
+  },
+  "doctors_page": {
+    "contact_information": "Contact information:",
+    "details": "Details"
   }
 }
