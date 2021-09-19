@@ -3,6 +3,7 @@ import { HTTP_METHODS } from 'consts';
 
 const ROUTES = {
   DOCTOR_APPOINTMENTS: (doctorId) => `/doctors/${doctorId}/appointments`,
+  APPOINTMENT: (appointmentId) => `/appoinments/${appointmentId}`,
 };
 
 class AppointmentService {
@@ -13,6 +14,13 @@ class AppointmentService {
   getDoctorAppointments = (doctorId) => {
     return this.httpService.request({
       url: ROUTES.DOCTOR_APPOINTMENTS(doctorId),
+      method: HTTP_METHODS.GET,
+    });
+  };
+
+  getAppointment = (appointmentId) => {
+    return this.httpService.request({
+      url: ROUTES.APPOINTMENT(appointmentId),
       method: HTTP_METHODS.GET,
     });
   };
