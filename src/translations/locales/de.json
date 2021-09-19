@@ -134,5 +134,12 @@
   "doctors_page": {
     "contact_information": "Contact information:",
     "details": "Details"
+  },
+  "appointments": {
+    "appointments": "Appointments",
+    "date": "Appointment date:",
+    "book": "Book",
+    "with": "Appointment with: {{doctorName}}",
+    "booked": "Booked"
   }
 }

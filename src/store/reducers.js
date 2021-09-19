@@ -7,6 +7,7 @@ import notifierReducer from './notifier/reducer';
 import authReducer from './auth/reducer';
 import profileReducer from './profile/reducer';
 import doctorReducer from './doctor/reducer';
+import appointmentReducer from './appointment/reducer';
 
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ export default function createReducer(injectedReducers = {}) {
     auth: authReducer,
     profile: profileReducer,
     doctor: doctorReducer,
+    appointments: appointmentReducer,
     ...injectedReducers,
   });
 

@@ -13,7 +13,7 @@ const DoctorPreview = ({ doctor }) => {
   const appointmentsLink = generatePath(DOCTOR, { id: doctor?.id });
 
   return (
-    <Card>
+    <Card className="mb-3">
       <Card.Header as="h5">{fullName}</Card.Header>
       <Card.Body>
         <Card.Title>{t('doctors_page.contact_information')}</Card.Title>

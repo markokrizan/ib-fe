@@ -27,6 +27,7 @@ const doctorReducer = (state = initialState, action) =>
         break;
       case GET_DOCTORS_ERROR:
         draft.getDoctorsError = true;
+        break;
       case GET_DOCTOR_REQUEST:
         draft.getDoctorError = false;
         break;
@@ -35,6 +36,7 @@ const doctorReducer = (state = initialState, action) =>
         break;
       case GET_DOCTOR_ERROR:
         draft.getDoctorError = true;
+        break;
     }
   });
 
