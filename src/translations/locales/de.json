@@ -139,7 +139,10 @@
     "appointments": "Appointments",
     "date": "Appointment date:",
     "book": "Book",
+    "create": "Create",
     "with": "Appointment with: {{doctorName}}",
-    "booked": "Booked"
+    "booked": "Booked",
+    "doctorLabel": "Doctor: ",
+    "dateLabel": "Date: "
   }
 }

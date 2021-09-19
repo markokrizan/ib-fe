@@ -5,7 +5,7 @@ import Link from 'components/Link';
 import { generatePath } from 'react-router';
 import { DOCTOR_APPOINTMENT } from 'routes';
 
-const AppointmentPreview = ({ appointment }) => {
+const AppointmentPreview = ({ appointment, showDetailsLink = true }) => {
   const { t } = useTranslation();
 
   const doctorFullName = `${appointment?.doctor?.firstName} ${appointment?.doctor?.lastName}`;
@@ -16,7 +16,7 @@ const AppointmentPreview = ({ appointment }) => {
   const isBooked = !!appointment?.patient;
 
   return (
-    <Card>
+    <Card className="mb-3">
       <Card.Header as="h5">
         {t('appointments.with', { doctorName: doctorFullName })}
         {isBooked && <span className="ml-1">({t('appointments.booked')})</span>}
@@ -24,7 +24,7 @@ const AppointmentPreview = ({ appointment }) => {
       <Card.Body>
         <Card.Title>{t('appointments.date')}</Card.Title>
         <Card.Text>{appointment.date}</Card.Text>
-        {!isBooked && (
+        {!isBooked && showDetailsLink && (
           <Link to={appointmentsLink}>{t('appointments.book')}</Link>
         )}
       </Card.Body>

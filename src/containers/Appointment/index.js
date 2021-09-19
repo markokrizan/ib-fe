@@ -1,3 +1,4 @@
+import AppointmentBook from 'components/AppointmentBook';
 import AppointmentPreview from 'components/AppointmentPreview';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +11,7 @@ import {
 } from 'store/appointment/selectors';
 
 const Appointment = () => {
-  const { id: doctorId, appointmentId } = useParams();
+  const { appointmentId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const Appointment = () => {
   const appointment = useSelector(makeSelectAppointment());
   const appointmentLoading = useSelector(makeSelectIsAppointmentLoading());
   const appointmentError = useSelector(makeSelectAppointmentError());
+  const isBooked = !!appointment?.patient;
 
   if (appointmentLoading) {
     return <span>Loading...</span>;
@@ -33,7 +35,12 @@ const Appointment = () => {
     return null;
   }
 
-  return <AppointmentPreview appointment={appointment} />;
+  return (
+    <>
+      <AppointmentPreview appointment={appointment} showDetailsLink={false} />
+      {!isBooked && <AppointmentBook appointment={appointment} />}
+    </>
+  );
 };
 
 export default Appointment;

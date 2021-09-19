@@ -1,14 +1,8 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router';
-import { getDoctors } from 'store/doctor/actions';
-import {
-  makeSelectDoctors,
-  makeSelectDoctorsError,
-  makeSelectIsDoctorsLoading,
-} from 'store/doctor/selectors';
 import DoctorPreview from 'components/DoctorPreview';
 import Doctor from 'containers/Doctor';
+import useDoctors from 'hooks/useDoctors';
 
 const Doctors = () => {
   let { path } = useRouteMatch();
@@ -22,15 +16,7 @@ const Doctors = () => {
 };
 
 const DoctorList = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getDoctors());
-  }, []);
-
-  const doctors = useSelector(makeSelectDoctors());
-  const doctorsLoading = useSelector(makeSelectIsDoctorsLoading());
-  const doctorsError = useSelector(makeSelectDoctorsError());
+  const { doctors, doctorsLoading, doctorsError } = useDoctors();
 
   if (doctorsLoading) {
     return <span>Loading...</span>;
@@ -40,7 +26,7 @@ const DoctorList = () => {
     return <span>Error loading doctors!</span>;
   }
 
-  if (!doctors?.content) {
+  if (!doctors?.content?.length) {
     return null;
   }
 
