@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Route, Switch, useRouteMatch } from 'react-router';
 import { getDoctors } from 'store/doctor/actions';
 import {
   makeSelectDoctors,
@@ -7,8 +8,20 @@ import {
   makeSelectIsDoctorsLoading,
 } from 'store/doctor/selectors';
 import DoctorPreview from 'components/DoctorPreview';
+import Doctor from 'containers/Doctor';
 
 const Doctors = () => {
+  let { path } = useRouteMatch();
+
+  return (
+    <Switch>
+      <Route exact path={path} component={DoctorList} />
+      <Route path={`${path}/:id`} component={Doctor} />
+    </Switch>
+  );
+};
+
+const DoctorList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {

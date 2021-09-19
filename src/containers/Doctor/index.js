@@ -7,7 +7,7 @@ import {
   makeSelectDoctorError,
 } from 'store/doctor/selectors';
 import DoctorPreview from 'components/DoctorPreview';
-import { useParams } from 'react-router';
+import { Switch, Route, useParams, useRouteMatch } from 'react-router';
 import { getDoctorAppointments } from 'store/appointment/actions';
 import {
   makeSelectAreDoctorsAppointmentsLoading,
@@ -16,8 +16,24 @@ import {
 } from 'store/appointment/selectors';
 import AppointmentPreview from 'components/AppointmentPreview';
 import { useTranslation } from 'react-i18next';
+import Appointment from 'containers/Appointment';
 
 const Doctor = () => {
+  let { path } = useRouteMatch();
+
+  return (
+    <Switch>
+      <Route exact path={path} component={SingleDoctor} />
+      <Route
+        exact
+        path={`${path}/appointments/:appointmentId`}
+        component={Appointment}
+      />
+    </Switch>
+  );
+};
+
+const SingleDoctor = () => {
   const { id: doctorId } = useParams();
   const { t } = useTranslation();
 
