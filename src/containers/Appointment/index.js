@@ -1,5 +1,4 @@
-import AppointmentBook from 'components/AppointmentBook';
-import AppointmentPreview from 'components/AppointmentPreview';
+import AppointmentForm from 'components/AppointmentForm';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
@@ -21,7 +20,6 @@ const Appointment = () => {
   const appointment = useSelector(makeSelectAppointment());
   const appointmentLoading = useSelector(makeSelectIsAppointmentLoading());
   const appointmentError = useSelector(makeSelectAppointmentError());
-  const isBooked = !!appointment?.patient;
 
   if (appointmentLoading) {
     return <span>Loading...</span>;
@@ -37,8 +35,7 @@ const Appointment = () => {
 
   return (
     <>
-      <AppointmentPreview appointment={appointment} showDetailsLink={false} />
-      {!isBooked && <AppointmentBook appointment={appointment} />}
+      <AppointmentForm appointment={appointment} />
     </>
   );
 };

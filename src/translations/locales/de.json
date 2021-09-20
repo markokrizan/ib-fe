@@ -139,10 +139,15 @@
     "appointments": "Appointments",
     "date": "Appointment date:",
     "book": "Book",
-    "create": "Create",
+    "save": "Save",
     "with": "Appointment with: {{doctorName}}",
-    "booked": "Booked",
+    "booked": "Appointment booked",
     "doctorLabel": "Doctor: ",
-    "dateLabel": "Date: "
+    "patientLabel": "Patient: ",
+    "dateLabel": "Date: ",
+    "updateAppointment": "Update appointment"
+  },
+  "common": {
+    "loading": "Loading..."
   }
 }

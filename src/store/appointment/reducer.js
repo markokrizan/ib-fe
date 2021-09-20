@@ -6,6 +6,7 @@ import {
   GET_DOCTOR_APPOINTMENTS_ERROR,
   GET_DOCTOR_APPOINTMENTS_REQUEST,
   GET_DOCTOR_APPOINTMENTS_SUCCESS,
+  UPDATE_DOCTOR_APPOINTMENT,
 } from './actionTypes';
 
 export const initialState = {
@@ -13,6 +14,7 @@ export const initialState = {
   doctorAppointmentsError: null,
   appointment: null,
   appointmentError: null,
+  appointmentBookError: null,
 };
 
 /* eslint-disable default-case */
@@ -24,6 +26,17 @@ const doctorReducer = (state = initialState, action) =>
         break;
       case GET_DOCTOR_APPOINTMENTS_SUCCESS:
         draft.doctorAppointments = action.appointments;
+        break;
+      case UPDATE_DOCTOR_APPOINTMENT:
+        draft.doctorAppointments.content = draft.doctorAppointments.content.map(
+          (appointment) => {
+            if (appointment.id !== action.appointment.id) {
+              return appointment;
+            }
+
+            return action.appointment;
+          }
+        );
         break;
       case GET_DOCTOR_APPOINTMENTS_ERROR:
         draft.doctorAppointmentsError = true;

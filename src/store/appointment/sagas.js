@@ -1,12 +1,15 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import {
+  bookAppointmentError,
   getAppointmentError,
   getDoctorAppointmentsError,
   setAppointment,
   setDoctorAppointments,
+  updateDoctorAppointment,
 } from './actions';
 import { startAction, stopAction } from '../loading/actions';
 import {
+  BOOK_APPOINTMENT_REQUEST,
   GET_APPOINTMENT_REQUEST,
   GET_DOCTOR_APPOINTMENTS_REQUEST,
 } from './actionTypes';
@@ -46,7 +49,29 @@ export function* getAppointment({ type, appointmentId }) {
   }
 }
 
+export function* bookAppointment({ type, appointment, patient }) {
+  try {
+    yield put(startAction(type));
+
+    const bookedAppointment = yield call(appointmentService.bookAppointment, {
+      appointment: {
+        id: appointment.id,
+      },
+      patient: {
+        id: patient.id,
+      },
+    });
+
+    yield put(updateDoctorAppointment(bookedAppointment));
+  } catch (error) {
+    yield put(bookAppointmentError());
+  } finally {
+    yield put(stopAction(type));
+  }
+}
+
 export default function* appointmentsSaga() {
   yield takeLatest(GET_DOCTOR_APPOINTMENTS_REQUEST, getDoctorAppointments);
   yield takeLatest(GET_APPOINTMENT_REQUEST, getAppointment);
+  yield takeLatest(BOOK_APPOINTMENT_REQUEST, bookAppointment);
 }

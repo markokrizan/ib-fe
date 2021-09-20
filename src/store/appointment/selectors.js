@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 import { makeSelectIsLoading } from '../loading/selectors';
 import {
+  BOOK_APPOINTMENT_REQUEST,
   GET_APPOINTMENT_REQUEST,
   GET_DOCTOR_APPOINTMENTS_REQUEST,
 } from './actionTypes';
@@ -23,6 +24,9 @@ const makeSelectDoctorsAppointmentsError = () =>
 const makeSelectIsAppointmentLoading = () =>
   makeSelectIsLoading(GET_APPOINTMENT_REQUEST);
 
+const makeSelectIsAppointmentBookLoading = () =>
+  makeSelectIsLoading(BOOK_APPOINTMENT_REQUEST);
+
 const makeSelectAppointment = () =>
   createSelector(selectAppointments, (substate) => substate.appointment);
 
@@ -36,4 +40,5 @@ export {
   makeSelectIsAppointmentLoading,
   makeSelectAppointment,
   makeSelectAppointmentError,
+  makeSelectIsAppointmentBookLoading,
 };

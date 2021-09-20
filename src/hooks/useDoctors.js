@@ -7,11 +7,13 @@ import {
   makeSelectIsDoctorsLoading,
 } from 'store/doctor/selectors';
 
-const useDoctors = () => {
+const useDoctors = (options = { shoudFetch: true }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDoctors());
+    if (options.shoudFetch) {
+      dispatch(getDoctors());
+    }
   }, []);
 
   const doctors = useSelector(makeSelectDoctors());

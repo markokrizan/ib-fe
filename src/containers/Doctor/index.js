@@ -57,7 +57,7 @@ const SingleDoctor = () => {
   );
 
   if (doctorLoading || ddoctorAppointmentsLoading) {
-    return <span>Loading...</span>;
+    return <span>{t('common.loading')}</span>;
   }
 
   if (doctorError || doctorAppointmentsError) {
