@@ -10,6 +10,7 @@ import RegisterPage from 'containers/RegisterPage/Loadable';
 import ForgotPasswordPage from 'containers/ForgotPasswordPage/Loadable';
 import ResetPasswordPage from 'containers/ResetPasswordPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import MedicalRecord from 'containers/MedicalRecord/Loadable';
 import {
   WELCOME,
   DASHBOARD,
@@ -18,6 +19,7 @@ import {
   FORGOT_PASSWORD,
   RESET_PASSWORD,
   USER_PROFILE,
+  PATIENT_MEDICAL_RECORD,
 } from 'routes';
 
 export default function Routes() {
@@ -25,6 +27,7 @@ export default function Routes() {
     <Switch>
       <PublicRoute exact path={WELCOME} component={WelcomePage} />
       <PrivateRoute path={DASHBOARD} component={Dashboard} />
+      <PrivateRoute path={PATIENT_MEDICAL_RECORD} component={MedicalRecord} />
       <PrivateRoute exact path={USER_PROFILE} component={UserProfilePage} />
       <PublicRoute exact path={LOGIN} component={LoginPage} />
       <PublicRoute exact path={REGISTER} component={RegisterPage} />

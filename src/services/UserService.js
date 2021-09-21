@@ -2,22 +2,22 @@ import httpService from './HttpService';
 import { HTTP_METHODS } from 'consts';
 
 const ROUTES = {
-  DOCTORS: '/users/doctors',
+  USER: (userId) => `/users/${userId}`,
 };
 
-class DoctorService {
+class UserService {
   constructor(httpService) {
     this.httpService = httpService;
   }
 
-  getDoctors = () => {
+  getUser = (id) => {
     return this.httpService.request({
-      url: ROUTES.DOCTORS,
+      url: ROUTES.USER(id),
       method: HTTP_METHODS.GET,
     });
   };
 }
 
-const doctorService = new DoctorService(httpService);
+const userService = new UserService(httpService);
 
-export default doctorService;
+export default userService;

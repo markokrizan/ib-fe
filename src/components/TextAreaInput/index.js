@@ -2,9 +2,8 @@ import React from 'react';
 import { Field } from 'formik';
 import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { getDateInputFormat } from 'utils/date';
 
-const DateInput = ({ name, label, placeholder, ...rest }) => {
+const TextAreaInput = ({ name, label, placeholder, ...rest }) => {
   const { t } = useTranslation();
 
   return (
@@ -12,12 +11,13 @@ const DateInput = ({ name, label, placeholder, ...rest }) => {
       {({ field: { value, onChange }, form: { touched, errors } }) => (
         <Form.Group className="mb-3">
           {label && <Form.Label htmlFor={label}>{label}</Form.Label>}
-          <input
-            type="date"
+          <textarea
             name={name}
-            value={getDateInputFormat(value)}
+            className="form-control"
+            rows="5"
+            placeholder={placeholder ?? ''}
+            value={value}
             onChange={onChange}
-            className="w-100"
             {...rest}
           />
           {!!touched[name] && !!errors[name] && (
@@ -29,4 +29,4 @@ const DateInput = ({ name, label, placeholder, ...rest }) => {
   );
 };
 
-export default DateInput;
+export default TextAreaInput;

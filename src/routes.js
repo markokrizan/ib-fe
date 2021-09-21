@@ -9,3 +9,4 @@ export const DOCTORS = '/dashboard/doctors';
 export const DOCTOR = '/dashboard/doctors/:id';
 export const DOCTOR_APPOINTMENT =
   '/dashboard/doctors/:doctorId/appointments/:appointmentId';
+export const PATIENT_MEDICAL_RECORD = '/patients/:id/medical-record';

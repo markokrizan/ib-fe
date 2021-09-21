@@ -10,7 +10,6 @@ import { getUserFullName, userHasRole } from 'utils/user';
 import { ROLE_ADMIN, ROLE_DOCTOR } from 'utils/constants';
 import Yup from 'utils/validations';
 import DateInput from 'components/DateInput';
-import { getDateInputFormat } from 'utils/date';
 
 export const validationSchema = Yup.object().shape({
   doctor: Yup.string().required('global.validations.required'),
@@ -58,7 +57,7 @@ const AppointmentForm = ({ appointment }) => {
     if (appointment) {
       return {
         doctor: appointment.doctor.id ?? '',
-        date: getDateInputFormat(appointment.date) ?? '',
+        date: appointment.date ?? '',
       };
     }
 

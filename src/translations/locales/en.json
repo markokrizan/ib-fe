@@ -145,9 +145,13 @@
     "doctorLabel": "Doctor: ",
     "patientLabel": "Patient: ",
     "dateLabel": "Date: ",
-    "updateAppointment": "Update appointment"
+    "updateAppointment": "Update appointment",
+    "bookedBy": "Booked by: "
   },
   "common": {
     "loading": "Loading..."
+  },
+  "medicalRecord": {
+    "medicalRecord": "Medical record"
   }
 }

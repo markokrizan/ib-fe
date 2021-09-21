@@ -8,6 +8,7 @@ import authReducer from './auth/reducer';
 import profileReducer from './profile/reducer';
 import doctorReducer from './doctor/reducer';
 import appointmentReducer from './appointment/reducer';
+import patientReducer from './patient/reducer';
 
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ export default function createReducer(injectedReducers = {}) {
     profile: profileReducer,
     doctor: doctorReducer,
     appointments: appointmentReducer,
+    patient: patientReducer,
     ...injectedReducers,
   });
 

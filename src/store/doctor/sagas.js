@@ -8,6 +8,7 @@ import {
 import { startAction, stopAction } from '../loading/actions';
 import { GET_DOCTORS_REQUEST, GET_DOCTOR_REQUEST } from './actionTypes';
 import doctorService from 'services/DoctorService';
+import userService from 'services/UserService';
 
 export function* getDoctors({ type }) {
   try {
@@ -27,7 +28,7 @@ export function* getDoctor({ type, id }) {
   try {
     yield put(startAction(type));
 
-    const doctor = yield call(doctorService.getDoctor, id);
+    const doctor = yield call(userService.getUser, id);
 
     yield put(setDoctor(doctor));
   } catch (error) {

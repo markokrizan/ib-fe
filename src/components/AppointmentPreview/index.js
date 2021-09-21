@@ -9,7 +9,7 @@ import { ROLE_PATIENT } from 'utils/constants';
 import { makeSelectUser } from 'store/auth/selectors';
 import { bookAppointment } from 'store/appointment/actions';
 import { makeSelectIsAppointmentBookLoading } from 'store/appointment/selectors';
-import { DOCTOR_APPOINTMENT } from 'routes';
+import { DOCTOR_APPOINTMENT, PATIENT_MEDICAL_RECORD } from 'routes';
 import Link from 'components/Link';
 import { getPresentationFormat } from 'utils/date';
 
@@ -28,6 +28,11 @@ const AppointmentPreview = ({ appointment }) => {
     doctorId: appointment?.doctor?.id,
     appointmentId: appointment?.id,
   });
+  const patientMedicalRecordLink = appointment?.patient?.id
+    ? generatePath(PATIENT_MEDICAL_RECORD, {
+        id: appointment?.patient?.id,
+      })
+    : null;
 
   const book = () =>
     dispatch(bookAppointment({ appointment, patient: loggedInUser }));
@@ -56,6 +61,12 @@ const AppointmentPreview = ({ appointment }) => {
           <Button onClick={book} disabled={isAppointmentBookLoading}>
             {t('appointments.book')}
           </Button>
+        )}
+        {appointment?.patient && appointment?.doctor?.id === loggedInUser.id && (
+          <Link to={patientMedicalRecordLink}>
+            <Card.Title>{t('appointments.bookedBy')}</Card.Title>
+            <Card.Text>{getUserFullName(appointment?.patient)}</Card.Text>
+          </Link>
         )}
       </Card.Body>
     </Card>
