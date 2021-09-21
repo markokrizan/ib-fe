@@ -12,7 +12,7 @@ import { makeSelectMedicalRecord } from 'store/patient/selectors';
 import { getUserFullName } from 'utils/user';
 import TextAreaInput from 'components/TextAreaInput';
 
-export const MedicalRecord = () => {
+const MedicalRecord = () => {
   let { id: patientId } = useParams();
 
   const dispatch = useDispatch();
@@ -72,3 +72,5 @@ const MedicalRecordForm = ({ medicalRecord }) => {
     </Formik>
   );
 };
+
+export default MedicalRecord;
