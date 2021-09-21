@@ -4,12 +4,13 @@ import { Button, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import Select from 'components/Select';
 import useDoctors from 'hooks/useDoctors';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeSelectUser } from 'store/auth/selectors';
 import { getUserFullName, userHasRole } from 'utils/user';
 import { ROLE_ADMIN, ROLE_DOCTOR } from 'utils/constants';
 import Yup from 'utils/validations';
 import DateInput from 'components/DateInput';
+import { saveAppointment } from 'store/appointment/actions';
 
 export const validationSchema = Yup.object().shape({
   doctor: Yup.string().required('global.validations.required'),
@@ -18,6 +19,7 @@ export const validationSchema = Yup.object().shape({
 
 const AppointmentForm = ({ appointment }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const isBooked = appointment.patient;
 
@@ -48,9 +50,13 @@ const AppointmentForm = ({ appointment }) => {
   const isDoctor = userHasRole(loggedInUser, ROLE_DOCTOR);
 
   const handleOnSubmit = (data) => {
-    const values = { ...data, ...(appointment ? { id: appointment.id } : {}) };
+    const values = {
+      ...data,
+      doctor: { id: data.doctor },
+      ...(appointment ? { id: appointment.id } : {}),
+    };
 
-    console.log(values);
+    dispatch(saveAppointment(values));
   };
 
   const getInitialValues = () => {

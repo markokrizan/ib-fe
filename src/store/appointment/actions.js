@@ -7,6 +7,8 @@ import {
   GET_DOCTOR_APPOINTMENTS_ERROR,
   GET_DOCTOR_APPOINTMENTS_REQUEST,
   GET_DOCTOR_APPOINTMENTS_SUCCESS,
+  SAVE_APPOINTMENT,
+  SAVE_APPOINTMENT_ERROR,
   UPDATE_DOCTOR_APPOINTMENT,
 } from './actionTypes';
 
@@ -68,5 +70,18 @@ export function updateDoctorAppointment(appointment) {
 export function bookAppointmentError() {
   return {
     type: BOOK_APPOINTMENT_ERROR,
+  };
+}
+
+export function saveAppointment(appointment) {
+  return {
+    type: SAVE_APPOINTMENT,
+    appointment,
+  };
+}
+
+export function saveAppointmentError() {
+  return {
+    type: SAVE_APPOINTMENT_ERROR,
   };
 }

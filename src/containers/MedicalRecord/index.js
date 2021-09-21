@@ -24,6 +24,10 @@ const MedicalRecord = () => {
 
   const medicalRecord = useSelector(makeSelectMedicalRecord());
 
+  if (!medicalRecord) {
+    return null;
+  }
+
   return (
     <Card>
       <Card.Header>

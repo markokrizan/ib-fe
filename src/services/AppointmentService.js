@@ -5,6 +5,7 @@ const ROUTES = {
   DOCTOR_APPOINTMENTS: (doctorId) => `/doctors/${doctorId}/appointments`,
   APPOINTMENT: (appointmentId) => `/appoinments/${appointmentId}`,
   BOOK_APPOINTMENT: '/appoinments/book',
+  SAVE_APPOINTMENT: '/appoinments',
 };
 
 class AppointmentService {
@@ -30,6 +31,14 @@ class AppointmentService {
     return this.httpService.request({
       url: ROUTES.BOOK_APPOINTMENT,
       method: HTTP_METHODS.PUT,
+      data,
+    });
+  };
+
+  saveAppointment = (data) => {
+    return this.httpService.request({
+      url: ROUTES.SAVE_APPOINTMENT,
+      method: HTTP_METHODS.POST,
       data,
     });
   };

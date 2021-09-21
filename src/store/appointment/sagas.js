@@ -6,12 +6,14 @@ import {
   setAppointment,
   setDoctorAppointments,
   updateDoctorAppointment,
+  saveAppointmentError,
 } from './actions';
 import { startAction, stopAction } from '../loading/actions';
 import {
   BOOK_APPOINTMENT_REQUEST,
   GET_APPOINTMENT_REQUEST,
   GET_DOCTOR_APPOINTMENTS_REQUEST,
+  SAVE_APPOINTMENT,
 } from './actionTypes';
 import appointmentService from 'services/AppointmentService';
 
@@ -70,8 +72,26 @@ export function* bookAppointment({ type, appointment, patient }) {
   }
 }
 
+export function* saveAppointment({ type, appointment }) {
+  try {
+    yield put(startAction(type));
+
+    const bookedAppointment = yield call(
+      appointmentService.saveAppointment,
+      appointment
+    );
+
+    yield put(updateDoctorAppointment(bookedAppointment));
+  } catch (error) {
+    yield put(saveAppointmentError());
+  } finally {
+    yield put(stopAction(type));
+  }
+}
+
 export default function* appointmentsSaga() {
   yield takeLatest(GET_DOCTOR_APPOINTMENTS_REQUEST, getDoctorAppointments);
   yield takeLatest(GET_APPOINTMENT_REQUEST, getAppointment);
   yield takeLatest(BOOK_APPOINTMENT_REQUEST, bookAppointment);
+  yield takeLatest(SAVE_APPOINTMENT, saveAppointment);
 }
