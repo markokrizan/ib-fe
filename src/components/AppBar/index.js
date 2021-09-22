@@ -7,11 +7,13 @@ import { useTranslation } from 'react-i18next';
 import { DASHBOARD, USER_PROFILE } from 'routes';
 import LanguagePicker from 'components/LanguagePicker';
 import Link from 'components/Link';
+import { formatRoles } from 'utils/user';
 
 function AppBar({ onLogout, user }) {
   const { t } = useTranslation();
 
   const userName = `${user?.firstName} ${user?.lastName}`;
+  const roles = formatRoles(user);
 
   return (
     <Navbar bg="light">
@@ -31,7 +33,9 @@ function AppBar({ onLogout, user }) {
             {t('app_bar.link.signedIn')}
           </Navbar.Text>
           <Navbar.Text className="me-3">
-            <Link to={USER_PROFILE}>{userName}</Link>
+            <Link to={USER_PROFILE}>
+              {userName} ({roles})
+            </Link>
           </Navbar.Text>
           <Button onClick={onLogout}>{t('app_bar.link.logout')}</Button>
         </Navbar.Collapse>
