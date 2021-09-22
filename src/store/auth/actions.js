@@ -106,13 +106,10 @@ export function forgotPasswordError() {
   };
 }
 
-export function register(firstName, lastName, email, password, setErrors) {
+export function register(data, setErrors) {
   return {
     type: REGISTER_REQUEST,
-    firstName,
-    lastName,
-    email,
-    password,
+    data,
     meta: {
       setErrors,
     },

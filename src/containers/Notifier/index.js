@@ -5,6 +5,7 @@ import { withSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
 import { makeSelectNotifications } from 'store/notifier/selectors';
 import { removeSnackbar } from 'store/notifier/actions';
+import { Alert } from 'react-bootstrap';
 
 export function Notifier({ enqueueSnackbar, closeSnackbar }) {
   const displayed = useRef([]);
@@ -29,14 +30,17 @@ export function Notifier({ enqueueSnackbar, closeSnackbar }) {
       } else {
         enqueueSnackbar('', {
           key,
-          ...options,
           onClose: (event, reason, key) => {
             if (options.onClose) {
               options.onClose(event, reason, key);
             }
             dispatch(removeSnackbar(key));
           },
-          content: (key) => <div id={key}>{t(message)}</div>,
+          content: (key) => (
+            <Alert id={key} variant={options.snackVariant || 'primary'}>
+              {t(message)}
+            </Alert>
+          ),
         });
 
         storeDisplayed(key);

@@ -10,7 +10,7 @@ import {
 } from 'store/auth/selectors';
 import { login } from 'store/auth/actions';
 import LoginForm from './LoginForm';
-import { REGISTER, FORGOT_PASSWORD } from 'routes';
+import { REGISTER } from 'routes';
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -34,9 +34,6 @@ function LoginPage() {
           <h1>{t('login_page.text.login_title')}</h1>
           <LoginForm onSubmit={submitLoginForm} isPending={isLoginPending} />
           <div className="mt-3">
-            <Link to={FORGOT_PASSWORD}>
-              {t('login_page.link.forgot_password')}
-            </Link>
             <br />
             <Link to={REGISTER}>{t('login_page.link.register')}</Link>
           </div>

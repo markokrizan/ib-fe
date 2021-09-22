@@ -45,7 +45,10 @@ export function* authorize({ type, username, password }) {
     if (error.status === HTTP_STATUS_CODES.UNAUTHORIZED) {
       yield put(
         enqueueSnackbar({
-          message: 'login_page.unauthorized',
+          message: error.data?.message ?? 'login_page.unauthorized',
+          options: {
+            snackVariant: 'danger',
+          },
         })
       );
     }
@@ -96,26 +99,12 @@ export function* forgotPassword({ type, email, meta: { setErrors } }) {
   }
 }
 
-export function* register({
-  type,
-  firstName: first_name,
-  lastName: last_name,
-  email,
-  password,
-  meta: { setErrors },
-}) {
+export function* register({ type, data, meta: { setErrors } }) {
   try {
     yield put(startAction(type));
-    const token = yield call(authService.register, {
-      first_name,
-      last_name,
-      email,
-      password,
-    });
-    yield put(setToken(token));
+    yield call(authService.register, data);
     yield put(registerSuccess());
-    yield put(fetchAuthenticatedUser());
-    yield put(push(DASHBOARD));
+    yield put(push(LOGIN));
   } catch (error) {
     if (error.status === HTTP_STATUS_CODES.VALIDATION_FAILED) {
       yield call(setErrors, parseApiErrorsToFormik(error.data.erorrs));

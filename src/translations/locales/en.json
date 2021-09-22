@@ -40,7 +40,8 @@
     "validations": {
       "email": "{{ label }} must be a valid email",
       "one_of": "{{ label }} must match with {{ value }}",
-      "required": "{{ label }} is required"
+      "required": "{{ label }} is required",
+      "passwordMatch": "Passwords must match"
     }
   },
   "login_page": {
