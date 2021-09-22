@@ -11,6 +11,7 @@ import { ROLE_ADMIN, ROLE_DOCTOR } from 'utils/constants';
 import Yup from 'utils/validations';
 import DateInput from 'components/DateInput';
 import { saveAppointment } from 'store/appointment/actions';
+import { makeSelectIsAppointmentSaveLoading } from 'store/appointment/selectors';
 
 export const validationSchema = Yup.object().shape({
   doctor: Yup.string().required('global.validations.required'),
@@ -28,6 +29,7 @@ const AppointmentForm = ({ appointment }) => {
   });
 
   const loggedInUser = useSelector(makeSelectUser());
+  const isSavingAppointment = useSelector(makeSelectIsAppointmentSaveLoading());
 
   if (isBooked) {
     return <span>{t('appointments.booked')}</span>;
@@ -106,7 +108,7 @@ const AppointmentForm = ({ appointment }) => {
                 disabled={!isAdmin}
               />
               <DateInput name="date" label={t('appointments.dateLabel')} />
-              <Button disabled={false} type="submit">
+              <Button disabled={isSavingAppointment} type="submit">
                 {t('appointments.save')}
               </Button>
             </Form>

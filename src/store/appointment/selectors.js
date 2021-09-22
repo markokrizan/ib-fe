@@ -5,7 +5,9 @@ import {
   BOOK_APPOINTMENT_REQUEST,
   GET_APPOINTMENT_REQUEST,
   GET_DOCTOR_APPOINTMENTS_REQUEST,
+  SAVE_APPOINTMENT,
 } from './actionTypes';
+import { SAVE_MEDICAL_RECORD } from 'store/patient/actionTypes';
 
 const selectAppointments = (state) => state.appointments || initialState;
 
@@ -27,6 +29,12 @@ const makeSelectIsAppointmentLoading = () =>
 const makeSelectIsAppointmentBookLoading = () =>
   makeSelectIsLoading(BOOK_APPOINTMENT_REQUEST);
 
+const makeSelectIsAppointmentSaveLoading = () =>
+  makeSelectIsLoading(SAVE_APPOINTMENT);
+
+const makeSelectIsMedicalRecordSaveLoading = () =>
+  makeSelectIsLoading(SAVE_MEDICAL_RECORD);
+
 const makeSelectAppointment = () =>
   createSelector(selectAppointments, (substate) => substate.appointment);
 
@@ -41,4 +49,6 @@ export {
   makeSelectAppointment,
   makeSelectAppointmentError,
   makeSelectIsAppointmentBookLoading,
+  makeSelectIsAppointmentSaveLoading,
+  makeSelectIsMedicalRecordSaveLoading,
 };

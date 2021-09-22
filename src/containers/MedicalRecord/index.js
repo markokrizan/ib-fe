@@ -11,6 +11,7 @@ import {
 import { makeSelectMedicalRecord } from 'store/patient/selectors';
 import { getUserFullName } from 'utils/user';
 import TextAreaInput from 'components/TextAreaInput';
+import { makeSelectIsMedicalRecordSaveLoading } from 'store/appointment/selectors';
 
 const MedicalRecord = () => {
   let { id: patientId } = useParams();
@@ -44,6 +45,9 @@ const MedicalRecord = () => {
 const MedicalRecordForm = ({ medicalRecord }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const isSavingMedicalRecord = useSelector(
+    makeSelectIsMedicalRecordSaveLoading()
+  );
 
   const handleSubmit = ({ content }) => {
     dispatch(
@@ -68,7 +72,11 @@ const MedicalRecordForm = ({ medicalRecord }) => {
             name="content"
             label={t('medicalRecord.medicalRecord')}
           />
-          <Button type="submit" variant="primary">
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={isSavingMedicalRecord}
+          >
             {t('appointments.save')}
           </Button>
         </Form>
