@@ -31,6 +31,7 @@ import { DASHBOARD, LOGIN } from 'routes';
 import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
 import authService from 'services/AuthService';
 import { HTTP_STATUS_CODES } from 'consts';
+import { showApiErrorSnack } from 'utils/snack';
 
 const getRouterLocationSearch = (state) => state.router.location.search;
 
@@ -42,17 +43,8 @@ export function* authorize({ type, username, password }) {
     yield put(setToken(token));
     yield put(push(DASHBOARD));
   } catch (error) {
-    if (error.status === HTTP_STATUS_CODES.UNAUTHORIZED) {
-      yield put(
-        enqueueSnackbar({
-          message: error.data?.message ?? 'login_page.unauthorized',
-          options: {
-            snackVariant: 'danger',
-          },
-        })
-      );
-    }
     yield put(loginError());
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }
@@ -64,7 +56,7 @@ export function* fetchUser({ type }) {
     const user = yield call(authService.fetchAuthenticatedUser);
     yield put(fetchAuthenticatedUserSuccess(user));
   } catch (error) {
-    //
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }
@@ -75,7 +67,7 @@ export function* logout() {
     yield call(authService.logout);
     yield put(logoutSuccess());
   } catch (error) {
-    //
+    yield put(showApiErrorSnack(error));
   }
 }
 
@@ -108,6 +100,8 @@ export function* register({ type, data, meta: { setErrors } }) {
   } catch (error) {
     if (error.status === HTTP_STATUS_CODES.VALIDATION_FAILED) {
       yield call(setErrors, parseApiErrorsToFormik(error.data.erorrs));
+    } else {
+      yield put(showApiErrorSnack(error));
     }
     yield put(registerError());
   } finally {
@@ -140,8 +134,11 @@ export function* resetPassword({
     );
     yield put(push(LOGIN));
   } catch (error) {
+    yield put(resetPasswordError());
     if (error.status === HTTP_STATUS_CODES.VALIDATION_FAILED) {
       yield call(setErrors, parseApiErrorsToFormik(error.data.errors));
+    } else {
+      yield put(showApiErrorSnack(error));
     }
     yield put(resetPasswordError());
   } finally {
@@ -165,6 +162,7 @@ export function* socialAuthentication({ type, accessToken, provider }) {
     yield put(push(DASHBOARD));
   } catch (error) {
     yield put(socialAuthError(error.data));
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }

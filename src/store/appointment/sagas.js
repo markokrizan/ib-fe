@@ -16,6 +16,7 @@ import {
   SAVE_APPOINTMENT,
 } from './actionTypes';
 import appointmentService from 'services/AppointmentService';
+import { showApiErrorSnack } from 'utils/snack';
 
 export function* getDoctorAppointments({ type, doctorId }) {
   try {
@@ -29,6 +30,7 @@ export function* getDoctorAppointments({ type, doctorId }) {
     yield put(setDoctorAppointments(appointments));
   } catch (error) {
     yield put(getDoctorAppointmentsError());
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }
@@ -46,6 +48,7 @@ export function* getAppointment({ type, appointmentId }) {
     yield put(setAppointment(appointment));
   } catch (error) {
     yield put(getAppointmentError());
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }
@@ -67,6 +70,7 @@ export function* bookAppointment({ type, appointment, patient }) {
     yield put(updateDoctorAppointment(bookedAppointment));
   } catch (error) {
     yield put(bookAppointmentError());
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }
@@ -84,6 +88,7 @@ export function* saveAppointment({ type, appointment }) {
     yield put(updateDoctorAppointment(bookedAppointment));
   } catch (error) {
     yield put(saveAppointmentError());
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }

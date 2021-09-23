@@ -9,6 +9,7 @@ import { startAction, stopAction } from '../loading/actions';
 import { GET_DOCTORS_REQUEST, GET_DOCTOR_REQUEST } from './actionTypes';
 import doctorService from 'services/DoctorService';
 import userService from 'services/UserService';
+import { showApiErrorSnack } from 'utils/snack';
 
 export function* getDoctors({ type }) {
   try {
@@ -19,6 +20,7 @@ export function* getDoctors({ type }) {
     yield put(setDoctors(doctors));
   } catch (error) {
     yield put(getDoctorsError());
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }
@@ -33,6 +35,7 @@ export function* getDoctor({ type, id }) {
     yield put(setDoctor(doctor));
   } catch (error) {
     yield put(getDoctorError());
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }

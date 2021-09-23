@@ -15,6 +15,7 @@ import {
 } from './actionTypes';
 import userService from 'services/UserService';
 import patientService from 'services/PatientService';
+import { showApiErrorSnack } from 'utils/snack';
 
 export function* getPatient({ type, patientId }) {
   try {
@@ -25,6 +26,7 @@ export function* getPatient({ type, patientId }) {
     yield put(setPatient(patient));
   } catch (error) {
     yield put(getPatientError());
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }
@@ -42,6 +44,7 @@ export function* getPatientMedicalRecord({ type, patientId }) {
     yield put(setPatientMedicalRecord(medicalRecord));
   } catch (error) {
     yield put(getPatientMedicalRecordError());
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }
@@ -65,6 +68,7 @@ export function* savePatientMedicalRecord({ type, patientId, medicalRecord }) {
     yield put(updatePatientMedicalRecord(updatedMedicalRecord));
   } catch (error) {
     yield put(saveMedicalRecordError());
+    yield put(showApiErrorSnack(error));
   } finally {
     yield put(stopAction(type));
   }
