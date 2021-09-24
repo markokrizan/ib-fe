@@ -28,7 +28,7 @@ class UserService {
   updateUser = (user) => {
     return this.httpService.request({
       url: ROUTES.USERS,
-      method: HTTP_METHODS.POST,
+      method: HTTP_METHODS.PUT,
       data: user,
     });
   };

@@ -1,7 +1,11 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { setUser, setUsers } from './actions';
+import { setSingleUser, setUser, setUsers } from './actions';
 import { startAction, stopAction } from '../loading/actions';
-import { GET_ALL_USERS_REQUEST, UPDATE_USER_REQUEST } from './actionTypes';
+import {
+  GET_ALL_USERS_REQUEST,
+  GET_USER_REQUEST,
+  UPDATE_USER_REQUEST,
+} from './actionTypes';
 import userService from 'services/UserService';
 import { showApiErrorSnack } from 'utils/snack';
 import { enqueueSnackbar } from 'store/notifier/actions';
@@ -15,6 +19,20 @@ export function* getUsers({ type }) {
     const users = yield call(userService.getUsers);
 
     yield put(setUsers(users));
+  } catch (error) {
+    yield put(showApiErrorSnack(error));
+  } finally {
+    yield put(stopAction(type));
+  }
+}
+
+export function* getUser({ type, userId }) {
+  try {
+    yield put(startAction(type));
+
+    const user = yield call(userService.getUser, userId);
+
+    yield put(setSingleUser(user));
   } catch (error) {
     yield put(showApiErrorSnack(error));
   } finally {
@@ -50,4 +68,5 @@ export function* updateUser({ type, user, meta: { setErrors } }) {
 export default function* userProfileSaga() {
   yield takeLatest(GET_ALL_USERS_REQUEST, getUsers);
   yield takeLatest(UPDATE_USER_REQUEST, updateUser);
+  yield takeLatest(GET_USER_REQUEST, getUser);
 }

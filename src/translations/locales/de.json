@@ -152,7 +152,8 @@
   "common": {
     "loading": "Loading...",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "save": "Save"
   },
   "medicalRecord": {
     "medicalRecord": "Medical record"

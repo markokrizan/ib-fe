@@ -3,19 +3,24 @@ import { Field } from 'formik';
 import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-const Input = ({ name, type, label, placeholder, ...rest }) => {
+const Checkbox = ({ name, type, label, placeholder, ...rest }) => {
   const { t } = useTranslation();
 
   return (
     <Field name={name}>
       {({ field: { value, onChange }, form: { touched, errors } }) => (
         <Form.Group className="mb-3">
-          {label && <Form.Label htmlFor={label}>{label}</Form.Label>}
-          <Form.Control
+          {label && (
+            <Form.Label htmlFor={label} className="me-1">
+              {label}
+            </Form.Label>
+          )}
+          <input
+            type="checkbox"
+            className="form-check-input"
             name={name}
-            type={type}
-            placeholder={placeholder ?? ''}
-            value={value ?? ''}
+            value={value}
+            checked={value}
             onChange={onChange}
             {...rest}
           />
@@ -28,4 +33,4 @@ const Input = ({ name, type, label, placeholder, ...rest }) => {
   );
 };
 
-export default Input;
+export default Checkbox;

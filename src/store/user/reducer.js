@@ -1,8 +1,13 @@
 import produce from 'immer';
-import { GET_ALL_USERS_SUCCESS, UPDATE_USER_SUCCESS } from './actionTypes';
+import {
+  GET_ALL_USERS_SUCCESS,
+  GET_USER_SUCCESS,
+  UPDATE_USER_SUCCESS,
+} from './actionTypes';
 
 export const initialState = {
   users: [],
+  user: null,
 };
 
 /* eslint-disable default-case */
@@ -20,6 +25,9 @@ const doctorReducer = (state = initialState, action) =>
 
           return action.user;
         });
+        break;
+      case GET_USER_SUCCESS:
+        draft.user = action.user;
         break;
     }
   });

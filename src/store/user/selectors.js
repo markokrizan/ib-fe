@@ -11,11 +11,15 @@ const makeSelectAreUsersLoading = () =>
 const makeSelectUsers = () =>
   createSelector(selectUsers, (substate) => substate.users);
 
+const makeSelectUser = () =>
+  createSelector(selectUsers, (substate) => substate.user);
+
 const makeSelectIsUserUpdatePending = () =>
   makeSelectIsLoading(UPDATE_USER_REQUEST);
 
 export {
   makeSelectAreUsersLoading,
   makeSelectUsers,
+  makeSelectUser,
   makeSelectIsUserUpdatePending,
 };
