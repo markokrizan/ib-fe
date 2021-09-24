@@ -6,7 +6,7 @@ import Select from 'components/Select';
 import useDoctors from 'hooks/useDoctors';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeSelectUser } from 'store/auth/selectors';
-import { getUserFullName, userHasRole } from 'utils/user';
+import { getUserFullName, userHasRoles } from 'utils/user';
 import { ROLE_ADMIN, ROLE_DOCTOR } from 'utils/constants';
 import Yup from 'utils/validations';
 import DateInput from 'components/DateInput';
@@ -48,8 +48,8 @@ const AppointmentForm = ({ appointment }) => {
     label: getUserFullName(doctor),
   }));
 
-  const isAdmin = userHasRole(loggedInUser, ROLE_ADMIN);
-  const isDoctor = userHasRole(loggedInUser, ROLE_DOCTOR);
+  const isAdmin = userHasRoles(loggedInUser, [ROLE_ADMIN]);
+  const isDoctor = userHasRoles(loggedInUser, [ROLE_DOCTOR]);
 
   const handleOnSubmit = (data) => {
     const values = {

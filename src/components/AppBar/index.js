@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container, Navbar } from 'react-bootstrap';
-import { DOCTORS } from 'routes';
+import { DOCTORS, USERS } from 'routes';
 
 import { useTranslation } from 'react-i18next';
 import { DASHBOARD, USER_PROFILE } from 'routes';
 import LanguagePicker from 'components/LanguagePicker';
 import Link from 'components/Link';
-import { formatRoles } from 'utils/user';
+import { formatRoles, userHasRoles } from 'utils/user';
+import { ROLE_ADMIN } from 'utils/constants';
 
 function AppBar({ onLogout, user }) {
   const { t } = useTranslation();
 
   const userName = `${user?.firstName} ${user?.lastName}`;
   const roles = formatRoles(user);
+  const isAdmin = userHasRoles(user, [ROLE_ADMIN]);
 
   return (
     <Navbar bg="light">
@@ -25,6 +27,11 @@ function AppBar({ onLogout, user }) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Link to={DOCTORS}>Doctors</Link>
         </Navbar.Collapse>
+        {isAdmin && (
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Link to={USERS}>Users</Link>
+          </Navbar.Collapse>
+        )}
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text className="me-3">
             <LanguagePicker />

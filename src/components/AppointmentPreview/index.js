@@ -3,7 +3,7 @@ import { Button, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { generatePath } from 'react-router';
-import { getUserFullName, userHasRole } from 'utils/user';
+import { getUserFullName, userHasRoles } from 'utils/user';
 import { ROLE_PATIENT } from 'utils/constants';
 
 import { makeSelectUser } from 'store/auth/selectors';
@@ -20,7 +20,7 @@ const AppointmentPreview = ({ appointment }) => {
   const loggedInUser = useSelector(makeSelectUser());
   const doctorFullName = getUserFullName(appointment?.doctor);
   const isBooked = !!appointment?.patient;
-  const isPatient = userHasRole(loggedInUser, ROLE_PATIENT);
+  const isPatient = userHasRoles(loggedInUser, [ROLE_PATIENT]);
   const isAppointmentBookLoading = useSelector(
     makeSelectIsAppointmentBookLoading()
   );
