@@ -23,6 +23,7 @@ import {
   PATIENT_MEDICAL_RECORD,
   USERS,
 } from 'routes';
+import { ROLE_ADMIN } from 'utils/constants';
 
 export default function Routes() {
   return (
@@ -31,7 +32,7 @@ export default function Routes() {
       <PrivateRoute
         exact
         path={USERS}
-        rolesAllowed={['ROLE_ADMIN']}
+        rolesAllowed={[ROLE_ADMIN]}
         component={Users}
       />
       <PrivateRoute path={DASHBOARD} component={Dashboard} />
