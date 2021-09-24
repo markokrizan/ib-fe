@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDoctor } from 'store/doctor/actions';
 import {
   makeSelectDoctor,
-  makeSelectIsDoctorLoading,
   makeSelectDoctorError,
 } from 'store/doctor/selectors';
 import DoctorPreview from 'components/DoctorPreview';
 import { Switch, Route, useParams, useRouteMatch } from 'react-router';
 import { getDoctorAppointments } from 'store/appointment/actions';
 import {
-  makeSelectAreDoctorsAppointmentsLoading,
   makeSelectDoctorsAppointments,
   makeSelectDoctorsAppointmentsError,
 } from 'store/appointment/selectors';
@@ -45,20 +43,12 @@ const SingleDoctor = () => {
   }, []);
 
   const doctor = useSelector(makeSelectDoctor());
-  const doctorLoading = useSelector(makeSelectIsDoctorLoading());
   const doctorError = useSelector(makeSelectDoctorError());
 
   const doctorAppointments = useSelector(makeSelectDoctorsAppointments());
-  const ddoctorAppointmentsLoading = useSelector(
-    makeSelectAreDoctorsAppointmentsLoading()
-  );
   const doctorAppointmentsError = useSelector(
     makeSelectDoctorsAppointmentsError()
   );
-
-  if (doctorLoading || ddoctorAppointmentsLoading) {
-    return <span>{t('common.loading')}</span>;
-  }
 
   if (doctorError || doctorAppointmentsError) {
     return <span>Error loading doctors!</span>;
@@ -72,7 +62,7 @@ const SingleDoctor = () => {
     <>
       <DoctorPreview doctor={doctor} />
       <h5>{t('appointments.appointments')}</h5>
-      {doctorAppointments?.content.map((appointment) => (
+      {doctorAppointments?.content?.map((appointment) => (
         <AppointmentPreview key={appointment.id} appointment={appointment} />
       ))}
     </>

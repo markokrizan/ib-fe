@@ -16,11 +16,7 @@ const Doctors = () => {
 };
 
 const DoctorList = () => {
-  const { doctors, doctorsLoading, doctorsError } = useDoctors();
-
-  if (doctorsLoading) {
-    return <span>Loading...</span>;
-  }
+  const { doctors, doctorsError } = useDoctors();
 
   if (doctorsError) {
     return <span>Error loading doctors!</span>;
