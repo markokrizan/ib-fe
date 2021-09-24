@@ -154,5 +154,8 @@
   },
   "medicalRecord": {
     "medicalRecord": "Medical record"
+  },
+  "users": {
+    "updateSuccessful": "Update successful!"
   }
 }

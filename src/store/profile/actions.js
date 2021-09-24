@@ -1,36 +1,8 @@
 import {
-  UPDATE_USER_REQUEST,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_ERROR,
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_ERROR,
 } from './actionTypes';
-
-export function updateUser(firstName, lastName, avatar, setErrors) {
-  return {
-    type: UPDATE_USER_REQUEST,
-    firstName,
-    lastName,
-    avatar,
-    meta: {
-      setErrors,
-    },
-  };
-}
-
-export function updateUserSuccess() {
-  return {
-    type: UPDATE_USER_SUCCESS,
-  };
-}
-
-export function updateUserError(error) {
-  return {
-    type: UPDATE_USER_ERROR,
-    error,
-  };
-}
 
 export function changePassword(
   currentPassword,
