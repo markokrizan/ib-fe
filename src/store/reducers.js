@@ -9,6 +9,7 @@ import profileReducer from './profile/reducer';
 import doctorReducer from './doctor/reducer';
 import appointmentReducer from './appointment/reducer';
 import patientReducer from './patient/reducer';
+import userReducer from './user/reducer';
 
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ export default function createReducer(injectedReducers = {}) {
     doctor: doctorReducer,
     appointments: appointmentReducer,
     patient: patientReducer,
+    user: userReducer,
     ...injectedReducers,
   });
 

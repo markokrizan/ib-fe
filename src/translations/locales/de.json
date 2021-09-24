@@ -150,12 +150,20 @@
     "bookedBy": "Booked by: "
   },
   "common": {
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "yes": "Yes",
+    "no": "No"
   },
   "medicalRecord": {
     "medicalRecord": "Medical record"
   },
   "users": {
-    "updateSuccessful": "Update successful!"
+    "updateSuccessful": "Update successful!",
+    "active": "Active: ",
+    "id": "ID",
+    "fullName": "Full Name",
+    "email": "Email",
+    "roles": "Roles",
+    "verified": "Verified"
   }
 }

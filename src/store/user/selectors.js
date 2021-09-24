@@ -1,32 +1,21 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 import { makeSelectIsLoading } from '../loading/selectors';
-import { GET_DOCTORS_REQUEST, GET_DOCTOR_REQUEST } from './actionTypes';
+import { GET_ALL_USERS_REQUEST, UPDATE_USER_REQUEST } from './actionTypes';
 
-const selectDoctors = (state) => state.doctor || initialState;
+const selectUsers = (state) => state.user || initialState;
 
-const makeSelectIsDoctorsLoading = () =>
-  makeSelectIsLoading(GET_DOCTORS_REQUEST);
+const makeSelectAreUsersLoading = () =>
+  makeSelectIsLoading(GET_ALL_USERS_REQUEST);
 
-const makeSelectDoctors = () =>
-  createSelector(selectDoctors, (substate) => substate.doctors);
+const makeSelectUsers = () =>
+  createSelector(selectUsers, (substate) => substate.users);
 
-const makeSelectDoctorsError = () =>
-  createSelector(selectDoctors, (substate) => substate.getDoctorsError);
-
-const makeSelectIsDoctorLoading = () => makeSelectIsLoading(GET_DOCTOR_REQUEST);
-
-const makeSelectDoctor = () =>
-  createSelector(selectDoctors, (substate) => substate.doctor);
-
-const makeSelectDoctorError = () =>
-  createSelector(selectDoctors, (substate) => substate.getDoctorError);
+const makeSelectIsUserUpdatePending = () =>
+  makeSelectIsLoading(UPDATE_USER_REQUEST);
 
 export {
-  makeSelectIsDoctorsLoading,
-  makeSelectDoctors,
-  makeSelectDoctorsError,
-  makeSelectIsDoctorLoading,
-  makeSelectDoctor,
-  makeSelectDoctorError,
+  makeSelectAreUsersLoading,
+  makeSelectUsers,
+  makeSelectIsUserUpdatePending,
 };
