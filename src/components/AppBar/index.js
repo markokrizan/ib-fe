@@ -19,18 +19,20 @@ function AppBar({ onLogout, user }) {
 
   return (
     <Navbar bg="light">
-      <Container>
+      <Container className="d-flex align-items-baseline" fluid>
         <Link to={DASHBOARD}>
-          <Navbar.Brand>{t('app_bar.link.appName')}</Navbar.Brand>
+          <Navbar.Brand className="me-4 fw-bold">
+            {t('app_bar.link.appName')}
+          </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Link to={DOCTORS}>Doctors</Link>
-        </Navbar.Collapse>
+        <Link to={DOCTORS} className="me-3" showActiveStyle>
+          Doctors
+        </Link>
         {isAdmin && (
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Link to={USERS}>Users</Link>
-          </Navbar.Collapse>
+          <Link to={USERS} className="me-3" showActiveStyle>
+            Users
+          </Link>
         )}
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text className="me-3">

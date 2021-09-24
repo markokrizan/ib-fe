@@ -1,11 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const CustomLink = ({ children, ...rest }) => {
+const CustomLink = ({
+  children,
+  className,
+  showActiveStyle = false,
+  ...rest
+}) => {
   return (
-    <Link className="text-decoration-none text-reset" {...rest}>
+    <NavLink
+      className={`text-decoration-none text-reset ${className}`}
+      activeClassName={showActiveStyle ? 'text-decoration-underline' : ''}
+      {...rest}
+    >
       {children}
-    </Link>
+    </NavLink>
   );
 };
 
