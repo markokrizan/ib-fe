@@ -5,7 +5,7 @@ import Doctor from 'containers/Doctor';
 import useDoctors from 'hooks/useDoctors';
 
 const Doctors = () => {
-  let { path } = useRouteMatch();
+  const { path } = useRouteMatch();
 
   return (
     <Switch>

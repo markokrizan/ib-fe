@@ -30,7 +30,6 @@ export default function Routes() {
     <Switch>
       <PublicRoute exact path={WELCOME} component={WelcomePage} />
       <PrivateRoute
-        exact
         path={USERS}
         rolesAllowed={[ROLE_ADMIN]}
         component={Users}
