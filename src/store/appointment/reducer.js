@@ -1,5 +1,6 @@
 import produce from 'immer';
 import {
+  ADD_DOCTOR_APPOINTMENT,
   GET_APPOINTMENT_ERROR,
   GET_APPOINTMENT_REQUEST,
   GET_APPOINTMENT_SUCCESS,
@@ -26,6 +27,12 @@ const doctorReducer = (state = initialState, action) =>
         break;
       case GET_DOCTOR_APPOINTMENTS_SUCCESS:
         draft.doctorAppointments = action.appointments;
+        break;
+      case ADD_DOCTOR_APPOINTMENT:
+        draft.doctorAppointments.content = [
+          ...draft.doctorAppointments.content,
+          action.appointment,
+        ];
         break;
       case UPDATE_DOCTOR_APPOINTMENT:
         draft.doctorAppointments.content = draft.doctorAppointments.content.map(

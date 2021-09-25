@@ -10,6 +10,7 @@ import {
   SAVE_APPOINTMENT,
   SAVE_APPOINTMENT_ERROR,
   UPDATE_DOCTOR_APPOINTMENT,
+  ADD_DOCTOR_APPOINTMENT,
 } from './actionTypes';
 
 export function getDoctorAppointments(doctorId) {
@@ -63,6 +64,13 @@ export function bookAppointment({ appointment, patient }) {
 export function updateDoctorAppointment(appointment) {
   return {
     type: UPDATE_DOCTOR_APPOINTMENT,
+    appointment,
+  };
+}
+
+export function addDoctorAppointment(appointment) {
+  return {
+    type: ADD_DOCTOR_APPOINTMENT,
     appointment,
   };
 }

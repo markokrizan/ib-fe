@@ -7,6 +7,7 @@ import {
   setDoctorAppointments,
   updateDoctorAppointment,
   saveAppointmentError,
+  addDoctorAppointment,
 } from './actions';
 import { startAction, stopAction } from '../loading/actions';
 import {
@@ -85,7 +86,11 @@ export function* saveAppointment({ type, appointment }) {
       appointment
     );
 
-    yield put(updateDoctorAppointment(bookedAppointment));
+    if (appointment.id) {
+      yield put(updateDoctorAppointment(bookedAppointment));
+    } else {
+      yield put(addDoctorAppointment(bookedAppointment));
+    }
   } catch (error) {
     yield put(saveAppointmentError());
     yield put(showApiErrorSnack(error));

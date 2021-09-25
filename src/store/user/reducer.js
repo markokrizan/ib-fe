@@ -18,14 +18,16 @@ const userReducer = (state = initialState, action) =>
         draft.users = action.users;
         break;
       case UPDATE_USER_SUCCESS:
-        draft.users =
-          draft.users?.map((user) => {
-            if (user.id !== action.user.id) {
-              return user;
-            }
+        if (draft.users?.content?.length) {
+          draft.users.content =
+            draft.users?.content?.map((user) => {
+              if (user.id !== action.user.id) {
+                return user;
+              }
 
-            return action.user;
-          }) || [];
+              return action.user;
+            }) || [];
+        }
 
         draft.user = action.user;
         break;

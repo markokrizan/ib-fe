@@ -2,6 +2,7 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { isEmpty } from 'lodash-es';
 import Select from 'components/Select';
 import useDoctors from 'hooks/useDoctors';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,7 +23,7 @@ const AppointmentForm = ({ appointment }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const isBooked = appointment.patient;
+  const isBooked = !isEmpty(appointment?.patient);
 
   const { doctors, doctorsLoading } = useDoctors({
     shoudFetch: !isBooked,
@@ -92,7 +93,7 @@ const AppointmentForm = ({ appointment }) => {
   return (
     <div>
       <Card className="mb-3">
-        <Card.Header as="h5">{t('appointments.updateAppointment')}</Card.Header>
+        <Card.Header as="h5">{t('appointments.saveAppointment')}</Card.Header>
 
         <Card.Body className="d-flex justify-content-center">
           <Formik

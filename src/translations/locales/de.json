@@ -147,7 +147,9 @@
     "patientLabel": "Patient: ",
     "dateLabel": "Date: ",
     "updateAppointment": "Update appointment",
-    "bookedBy": "Booked by: "
+    "saveAppointment": "Save appointment",
+    "bookedBy": "Booked by: ",
+    "noAppointments": "No appointments yet"
   },
   "common": {
     "loading": "Loading...",
