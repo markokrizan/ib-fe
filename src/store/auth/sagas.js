@@ -15,6 +15,7 @@ import {
   resetPasswordError,
   socialAuthSuccess,
   socialAuthError,
+  setRoles,
 } from './actions';
 import { startAction, stopAction } from '../loading/actions';
 import { enqueueSnackbar } from '../notifier/actions';
@@ -26,6 +27,7 @@ import {
   REGISTER_REQUEST,
   RESET_PASSWORD_REQUEST,
   SOCIAL_AUTH_REQUEST,
+  GET_ALL_ROLES_REQUEST,
 } from './actionTypes';
 import { DASHBOARD, LOGIN } from 'routes';
 import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
@@ -168,6 +170,23 @@ export function* socialAuthentication({ type, accessToken, provider }) {
   }
 }
 
+export function* getAllRoles({ type }) {
+  try {
+    yield put(startAction(type));
+
+    const roles = yield call(authService.getAllRoles);
+    const rolesArray = Array.isArray(roles)
+      ? roles
+      : Object.keys(roles).map((key) => roles[key]);
+
+    yield put(setRoles(rolesArray));
+  } catch (error) {
+    yield put(showApiErrorSnack(error));
+  } finally {
+    yield put(stopAction(type));
+  }
+}
+
 export default function* authSaga() {
   yield takeLatest(LOGIN_REQUEST, authorize);
   yield takeLatest(FETCH_AUTHENTICATED_USER_REQUEST, fetchUser);
@@ -176,4 +195,5 @@ export default function* authSaga() {
   yield takeLatest(REGISTER_REQUEST, register);
   yield takeLatest(RESET_PASSWORD_REQUEST, resetPassword);
   yield takeLatest(SOCIAL_AUTH_REQUEST, socialAuthentication);
+  yield takeLatest(GET_ALL_ROLES_REQUEST, getAllRoles);
 }

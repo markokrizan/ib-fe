@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from 'store/user/actions';
 import { makeSelectIsUserUpdatePending } from 'store/user/selectors';
 import Yup from 'utils/validations';
+import Select from 'components/Select';
+import useRoles from 'hooks/useRoles';
 
 export const userSchema = Yup.object().shape({
   firstName: Yup.string().required('global.validations.required'),
@@ -26,9 +28,22 @@ const UserForm = ({ user }) => {
   const { t } = useTranslation();
 
   const isUpdatePending = useSelector(makeSelectIsUserUpdatePending());
+  const { roles } = useRoles();
+  const roleOptions =
+    roles?.map((role) => ({
+      value: role.id,
+      label: role.name,
+    })) || [];
 
   const handleOnSubmit = (values, setErrors) => {
-    dispatch(updateUser(values, setErrors));
+    const data = {
+      ...values,
+      roles: values.roles.map((roleId) => ({
+        id: parseInt(roleId, 10),
+      })),
+    };
+
+    dispatch(updateUser(data, setErrors));
   };
 
   return (
@@ -43,6 +58,7 @@ const UserForm = ({ user }) => {
         insuranceNumber: '',
         isVerified: false,
         ...user,
+        roles: user?.roles?.map((role) => role.id) || [],
       }}
       validationSchema={userSchema}
       onSubmit={handleOnSubmit}
@@ -101,6 +117,12 @@ const UserForm = ({ user }) => {
                 label="Insurance number"
                 placeholder="Insurance number"
               />
+              <Select
+                label="Role"
+                name="roles"
+                options={roleOptions}
+                multiple
+              />
               <Checkbox
                 name="isVerified"
                 label="Is verified"
@@ -108,7 +130,6 @@ const UserForm = ({ user }) => {
               />
             </Container>
           </Container>
-
           <Button
             disabled={isUpdatePending}
             type="submit"

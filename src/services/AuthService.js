@@ -12,6 +12,7 @@ const ROUTES = {
   RESET_PASSWORD: '/user/reset-password',
   SOCIAL: (provider) => `/auth/social/${provider}`,
   TOKEN_REFRESH: '/auth/refresh',
+  ROLES: '/auth/roles',
 };
 
 class AuthService {
@@ -106,6 +107,13 @@ class AuthService {
     this.setAuthToken(token);
 
     return token;
+  };
+
+  getAllRoles = () => {
+    return this.httpService.request({
+      url: ROUTES.ROLES,
+      method: HTTP_METHODS.GET,
+    });
   };
 
   socialAuth = async (provider, data) => {

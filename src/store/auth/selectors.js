@@ -7,6 +7,7 @@ import {
   REGISTER_REQUEST,
   RESET_PASSWORD_REQUEST,
   SOCIAL_AUTH_REQUEST,
+  GET_ALL_ROLES_REQUEST,
 } from './actionTypes';
 
 const selectAuth = (state) => state.auth || initialState;
@@ -36,6 +37,11 @@ const makeSelectError = () =>
 const makeSelectToken = () =>
   createSelector(selectAuth, (substate) => substate.token);
 
+const makeSelectRoles = () =>
+  createSelector(selectAuth, (substate) => substate.roles);
+
+const makeSelectRolesLoading = () => makeSelectIsLoading(GET_ALL_ROLES_REQUEST);
+
 export {
   makeSelectIsLoginPending,
   makeSelectIsForgotPasswordPending,
@@ -46,4 +52,6 @@ export {
   makeSelectError,
   makeSelectIsAuthenticated,
   makeSelectToken,
+  makeSelectRoles,
+  makeSelectRolesLoading,
 };

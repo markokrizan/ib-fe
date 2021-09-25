@@ -3,7 +3,14 @@ import { Field } from 'formik';
 import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-const Select = ({ name, label, placeholder, options, ...rest }) => {
+const Select = ({
+  name,
+  label,
+  placeholder,
+  options,
+  multiple = false,
+  ...rest
+}) => {
   const { t } = useTranslation();
 
   const Options = options.map((option) => (
@@ -18,10 +25,11 @@ const Select = ({ name, label, placeholder, options, ...rest }) => {
         <Form.Group className="mb-3">
           {label && <Form.Label htmlFor={label}>{label}</Form.Label>}
           <select
-            value={value ?? ''}
+            value={value}
             onChange={onChange}
             name={name}
-            className="w-100"
+            className="form-control w-100"
+            multiple={multiple}
             {...rest}
           >
             {Options}

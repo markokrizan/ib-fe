@@ -13,11 +13,13 @@ import {
   RESET_PASSWORD_ERROR,
   SOCIAL_AUTH_SUCCESS,
   SOCIAL_AUTH_ERROR,
+  GET_ALL_ROLES_SUCCESS,
 } from './actionTypes';
 
 export const initialState = {
   token: getItem('token') || null,
   user: null,
+  roles: [],
 };
 
 /* eslint-disable default-case */
@@ -53,6 +55,9 @@ const appReducer = (state = initialState, action) =>
         break;
       case SET_TOKEN:
         draft.token = action.token;
+        break;
+      case GET_ALL_ROLES_SUCCESS:
+        draft.roles = action.roles;
         break;
     }
   });

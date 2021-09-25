@@ -20,6 +20,8 @@ import {
   SOCIAL_AUTH_REQUEST,
   SOCIAL_AUTH_SUCCESS,
   SOCIAL_AUTH_ERROR,
+  GET_ALL_ROLES_REQUEST,
+  GET_ALL_ROLES_SUCCESS,
 } from './actionTypes';
 
 export function login(username, password, setErrors) {
@@ -171,3 +173,16 @@ export function socialAuthError(error) {
     error,
   };
 }
+
+export const getAllRoles = () => {
+  return {
+    type: GET_ALL_ROLES_REQUEST,
+  };
+};
+
+export const setRoles = (roles) => {
+  return {
+    type: GET_ALL_ROLES_SUCCESS,
+    roles,
+  };
+};
